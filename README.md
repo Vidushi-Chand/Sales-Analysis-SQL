@@ -151,6 +151,22 @@ Use cases include:
 
 ---
 
+## Key Insights
+
+The analysis of current sales orders revealed several key findings:
+
+- Total sales across current orders amounted to **380**.
+- **Product 101** generated the highest sales at **140**, contributing approximately **36%** of total sales.
+- **February** was the strongest month, generating **195** in sales and contributing approximately **51%** of total sales.
+- Sales increased by approximately **85%** from January to February, followed by a **58% decline** from February to March.
+- **Germany** generated slightly higher sales than the USA, with **200** compared with **180**.
+- **Mary** generated the highest customer sales at **125**.
+- The **Accessories** category generated **245** in sales, making it the highest-performing category.
+- **Mary** was the top-performing salesperson, generating **195** in sales.
+- Data quality checks identified NULL values in selected customer and employee fields and duplicate `OrderID` values in the `OrdersArchive` table.
+
+---
+
 ## Tools & Skills
 
 **Database:** SQL Server
