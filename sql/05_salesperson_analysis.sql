@@ -1,4 +1,3 @@
-```sql id="p4lqk1"
 /*
 =========================================================
 SALESPERSON ANALYSIS
@@ -17,17 +16,19 @@ How much sales did each salesperson generate?
 ---------------------------------------------------------
 */
 
-SELECT
+SELECT*,
+RANK() OVER (ORDER BY Total_Sales DESC) AS Best_Salesperson
+FROM 
+    (SELECT 
     E.EmployeeID,
     E.FirstName,
     E.LastName,
     SUM(O.Sales) AS Total_Sales
-FROM Sales.Employees AS E
-JOIN Sales.Orders AS O
+    FROM Sales.Employees AS E
+    JOIN Sales.Orders AS O
     ON E.EmployeeID = O.SalesPersonID
-GROUP BY
+    GROUP BY
     E.EmployeeID,
     E.FirstName,
-    E.LastName
-ORDER BY Total_Sales DESC;
-```
+    E.LastName) T
+ORDER BY Total_Sales DESC
