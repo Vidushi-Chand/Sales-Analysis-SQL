@@ -5,7 +5,6 @@ SQL TECHNIQUES
 
 Purpose:
 - Demonstrate filtering and aggregation
-- Demonstrate pattern matching
 - Understand the difference between GROUP BY and
   window functions
 */
@@ -34,43 +33,7 @@ ORDER BY Average_Score DESC;
 
 /*
 ---------------------------------------------------------
-2. SEARCH OPERATORS - LIKE
-
-Find customers whose first name:
-- Starts with 'M'
-- Ends with 'n'
-- Contains 'r'
-- Has 'r' in the third position
----------------------------------------------------------
-*/
-
--- Starts with 'M'
-SELECT *
-FROM Sales.Customers
-WHERE FirstName LIKE 'M%';
-
-
--- Ends with 'n'
-SELECT *
-FROM Sales.Customers
-WHERE FirstName LIKE '%n';
-
-
--- Contains 'r'
-SELECT *
-FROM Sales.Customers
-WHERE FirstName LIKE '%r%';
-
-
--- Has 'r' in the third position
-SELECT *
-FROM Sales.Customers
-WHERE FirstName LIKE '__r%';
-
-
-/*
----------------------------------------------------------
-3. WHY WINDOW FUNCTIONS?
+2. WHY WINDOW FUNCTIONS?
 GROUP BY vs. Window Functions
 ---------------------------------------------------------
 */
