@@ -20,41 +20,41 @@ How many records are in each table?
 
 SELECT
     'Customers' AS Table_Name,
-    COUNT(*) AS Total_Rows
+     COUNT(*)   AS Total_Rows
 FROM Sales.Customers
 
 UNION ALL
 
 SELECT
     'Employees',
-    COUNT(*)
+     COUNT(*)
 FROM Sales.Employees
 
 UNION ALL
 
 SELECT
     'Products',
-    COUNT(*)
+     COUNT(*)
 FROM Sales.Products
 
 UNION ALL
 
 SELECT
     'Orders',
-    COUNT(*)
+     COUNT(*)
 FROM Sales.Orders
 
 UNION ALL
 
 SELECT
     'OrdersArchive',
-    COUNT(*)
+     COUNT(*)
 FROM Sales.OrdersArchive;
 
 
 /*
 ---------------------------------------------------------
-2. DATA QUALITY CHECKS - NULL VALUES
+2.1 DATA QUALITY CHECKS - NULL VALUES
 Are there NULL values in the Customers table?
 ---------------------------------------------------------
 */
@@ -62,12 +62,11 @@ Are there NULL values in the Customers table?
 SELECT
     COUNT(*) AS Total_Rows,
     COUNT(*) - COUNT(CustomerID) AS NULLs_CustomerID,
-    COUNT(*) - COUNT(FirstName) AS NULLs_FirstName,
-    COUNT(*) - COUNT(LastName) AS NULLs_LastName,
-    COUNT(*) - COUNT(Country) AS NULLs_Country,
-    COUNT(*) - COUNT(Score) AS NULLs_Score
+    COUNT(*) - COUNT(FirstName)  AS NULLs_FirstName,
+    COUNT(*) - COUNT(LastName)   AS NULLs_LastName,
+    COUNT(*) - COUNT(Country)    AS NULLs_Country,
+    COUNT(*) - COUNT(Score)      AS NULLs_Score
 FROM Sales.Customers;
-
 
 /*
 Result:
@@ -77,42 +76,38 @@ LastName and Score each contain 1 NULL value.
 
 /*
 ---------------------------------------------------------
-3. DATA QUALITY CHECKS - NULL VALUES
+2.2 DATA QUALITY CHECKS - NULL VALUES
 Are there NULL values in the Employees table?
 ---------------------------------------------------------
 */
 
 SELECT
     COUNT(*) AS Total_Rows,
-    COUNT(*) - COUNT(EmployeeID) AS NULLs_EmployeeID,
-    COUNT(*) - COUNT(FirstName) AS NULLs_FirstName,
-    COUNT(*) - COUNT(LastName) AS NULLs_LastName,
-    COUNT(*) - COUNT(Department) AS NULLs_Department,
-    COUNT(*) - COUNT(BirthDate) AS NULLs_BirthDate,
-    COUNT(*) - COUNT(Gender) AS NULLs_Gender,
-    COUNT(*) - COUNT(Salary) AS NULLs_Salary,
-    COUNT(*) - COUNT(ManagerID) AS NULLs_ManagerID
+    COUNT(*) - COUNT(EmployeeID)   AS NULLs_EmployeeID,
+    COUNT(*) - COUNT(FirstName)    AS NULLs_FirstName,
+    COUNT(*) - COUNT(LastName)     AS NULLs_LastName,
+    COUNT(*) - COUNT(Department)   AS NULLs_Department,
+    COUNT(*) - COUNT(BirthDate)    AS NULLs_BirthDate,
+    COUNT(*) - COUNT(Gender)       AS NULLs_Gender,
+    COUNT(*) - COUNT(Salary)       AS NULLs_Salary,
+    COUNT(*) - COUNT(ManagerID)    AS NULLs_ManagerID
 FROM Sales.Employees;
 
 
 /*
 ---------------------------------------------------------
-4. DATA QUALITY CHECKS - DUPLICATES
+3. DATA QUALITY CHECKS - DUPLICATES
 Are there duplicate OrderIDs in OrdersArchive?
 ---------------------------------------------------------
 */
 
-SELECT
-    OrderID,
-    COUNT(*) OVER (PARTITION BY OrderID) AS Duplicate_Count
-FROM Sales.OrdersArchive
-WHERE OrderID IN
-(
-    SELECT OrderID
-    FROM Sales.OrdersArchive
-    GROUP BY OrderID
-    HAVING COUNT(*) > 1
-);
+SELECT*
+FROM
+    (SELECT
+	OrderID,
+	COUNT(*) OVER (PARTITION BY OrderID) AS Duplicate_Check
+	FROM Sales.OrdersArchive) T 
+WHERE Duplicate_Check > 1 
 
 
 /*
@@ -125,6 +120,4 @@ Examine the duplicate OrderIDs in detail.
 SELECT *
 FROM Sales.OrdersArchive
 WHERE OrderID IN (4, 6)
-ORDER BY
-    OrderID,
-    CreationTime;
+ORDER BY OrderID, CreationTime; 
