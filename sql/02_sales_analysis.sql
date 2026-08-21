@@ -53,8 +53,7 @@ SELECT
     ProductID,
     SUM(Sales) AS Total_Sales_By_Product,
     SUM(SUM(Sales)) OVER () AS Total_Sales,
-    SUM(Sales) * 100.0 /
-        SUM(SUM(Sales)) OVER () AS Sales_Percentage
+    SUM(Sales) * 100 / SUM(SUM(Sales)) OVER () AS Sales_Percentage        
 FROM Sales.Orders
 GROUP BY ProductID
 ORDER BY Sales_Percentage DESC;
@@ -89,8 +88,7 @@ SELECT
     MONTH(OrderDate) AS Month_Number,
     DATENAME(MONTH, OrderDate) AS Month,
     SUM(Sales) AS Monthly_Sales,
-    SUM(Sales) * 100.0 /
-        SUM(SUM(Sales)) OVER () AS Sales_Percentage
+    SUM(Sales) * 100 / SUM(SUM(Sales)) OVER () AS Sales_Percentage
 FROM Sales.Orders
 GROUP BY
     MONTH(OrderDate),
@@ -106,14 +104,14 @@ Which product generates the most sales?
 */
 
 SELECT TOP 1
-    P.Product,
+    P.ProductID,
+    P.Product, 
     SUM(O.Sales) AS Total_Sales
 FROM Sales.Orders AS O
-JOIN Sales.Products AS P
-    ON O.ProductID = P.ProductID
-GROUP BY P.Product
-ORDER BY Total_Sales DESC;
-
+LEFT JOIN Sales.Products AS P 
+    ON O.ProductID = P.ProductID 
+GROUP BY P.ProductID, P.Product 
+ORDER BY Total_Sales DESC; 
 
 /*
 ---------------------------------------------------------
@@ -151,27 +149,15 @@ ORDER BY Total_Sales DESC;
 Calculate the percentage change in sales between
 the current month and previous month.
 ---------------------------------------------------------
-*/
+*/   
 
-SELECT
-    Month_Number,
-    Month,
-    Monthly_Sales,
-    Previous_Month_Sales,
-    (Monthly_Sales - Previous_Month_Sales) * 100.0 /
-        NULLIF(Previous_Month_Sales, 0) AS Percentage_Change
+SELECT*,
+    100* (SalesByMonth - Previous_Month_Sales) / NULLIF(Previous_Month_Sales, 0) AS Percentage_Change
 FROM
-(
-    SELECT
-        MONTH(OrderDate) AS Month_Number,
-        DATENAME(MONTH, OrderDate) AS Month,
-        SUM(Sales) AS Monthly_Sales,
-        LAG(SUM(Sales)) OVER (
-            ORDER BY MONTH(OrderDate)
-        ) AS Previous_Month_Sales
-    FROM Sales.Orders
-    GROUP BY
-        MONTH(OrderDate),
-        DATENAME(MONTH, OrderDate)
-) AS T
-ORDER BY Month_Number;
+    (SELECT
+     MONTH(OrderDate) AS Months,
+     DATENAME(MONTH, OrderDate) AS Month_Name,
+     SUM (Sales) AS SalesByMonth,
+     LAG(SUM (Sales)) OVER (ORDER BY MONTH(OrderDate)) AS Previous_Month_Sales
+     FROM Sales.Orders
+     GROUP BY MONTH(OrderDate), DATENAME(MONTH, OrderDate) ) T 
