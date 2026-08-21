@@ -1,4 +1,3 @@
-```sql
 /*
 =========================================================
 SQL TECHNIQUES
@@ -169,8 +168,5 @@ SELECT
     OrderDate,
     ProductID,
     Sales,
-    SUM(Sales) OVER (
-        PARTITION BY ProductID
-    ) AS Total_Sales_By_Product
+    SUM(Sales) OVER (PARTITION BY ProductID) AS Total_Sales_By_Product
 FROM Sales.Orders;
-```
