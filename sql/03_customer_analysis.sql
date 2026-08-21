@@ -85,7 +85,7 @@ on their average number of days between orders.
 SELECT
 	CustomerID,
 	AVG (Difference) AS Avg_Days,
-	RANK() OVER (ORDER BY COALESCE(AVG (Difference),99999)) AS Rank
+	RANK() OVER (ORDER BY COALESCE(AVG (Difference),99999)) AS Loyalty_Rank
 FROM 
     (SELECT
 	CustomerID,
