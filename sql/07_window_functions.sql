@@ -7,7 +7,6 @@ Purpose:
 - Perform Top-N and Bottom-N analysis
 - Identify duplicate records
 - Segment data using NTILE()
-- Calculate values from previous and subsequent rows
 */
 
 
