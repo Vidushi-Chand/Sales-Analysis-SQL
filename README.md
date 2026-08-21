@@ -102,10 +102,9 @@ Customer behavior and contribution are analyzed through:
 
 Product performance is analyzed through:
 
-* Top-selling products
+* Lowest and highest individual sales by product
 * Sales by category
 * Category contribution to total sales
-* Lowest and highest individual sales by product
 
 ---
 
@@ -138,7 +137,6 @@ Window functions are used for practical analytical tasks including:
 
 * `ROW_NUMBER()`
 * `RANK()`
-* `DENSE_RANK()`
 * `NTILE()`
 * `LAG()`
 * `LEAD()`
@@ -152,7 +150,7 @@ Use cases include:
 * Duplicate identification
 * Data segmentation
 * Month-over-month analysis
-* Customer ordering analysis
+* Customer ordering analysis (Loyalty Ranking)
 
 ---
 
@@ -182,7 +180,7 @@ The project particularly focuses on understanding how aggregation, joins, and wi
 
 ---
 
-## Author
+## Created By
 
 **Vidushi Chand**
 
