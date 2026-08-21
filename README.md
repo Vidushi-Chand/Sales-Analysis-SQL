@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project uses SQL Server to analyze transactional sales data and generate insights into sales performance, customer behavior, product performance, and salesperson performance.
+This project uses SQL Server to analyze sales data and generate insights into sales performance, customer behavior, product performance, and salesperson performance.
 
 The project covers data profiling, data quality checks, sales analysis, customer analysis, product and category performance analysis, salesperson performance analysis.
 
