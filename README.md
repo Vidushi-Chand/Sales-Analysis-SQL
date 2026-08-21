@@ -18,7 +18,6 @@ The analysis focuses on answering questions such as:
 * Which customers generate the most sales?
 * Which countries generate the most sales?
 * How many orders does each customer have?
-* How do salespeople perform based on total sales?
 * How does sales performance change from month to month?
 * How can customers and orders be ranked or segmented using SQL?
 
