@@ -6,7 +6,6 @@ SQL TECHNIQUES
 Purpose:
 - Demonstrate filtering and aggregation
 - Demonstrate pattern matching
-- Demonstrate multi-table joins
 - Understand the difference between GROUP BY and
   window functions
 */
@@ -71,40 +70,7 @@ WHERE FirstName LIKE '__r%';
 
 /*
 ---------------------------------------------------------
-3. MULTI-TABLE JOIN
-
-Retrieve order information along with the related
-customer, product, and salesperson details.
-
-For each order:
-- OrderID
-- Customer name
-- Product name
-- Sales amount
-- Product price
-- Salesperson name
----------------------------------------------------------
-*/
-
-SELECT
-    O.OrderID,
-    C.FirstName AS Customer,
-    P.Product,
-    O.Sales,
-    P.Price,
-    E.FirstName AS Salesperson
-FROM Sales.Orders AS O
-LEFT JOIN Sales.Customers AS C
-    ON O.CustomerID = C.CustomerID
-LEFT JOIN Sales.Employees AS E
-    ON O.SalesPersonID = E.EmployeeID
-LEFT JOIN Sales.Products AS P
-    ON O.ProductID = P.ProductID;
-
-
-/*
----------------------------------------------------------
-4. WHY WINDOW FUNCTIONS?
+3. WHY WINDOW FUNCTIONS?
 GROUP BY vs. Window Functions
 ---------------------------------------------------------
 */
