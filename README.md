@@ -139,9 +139,6 @@ Window functions are used for practical analytical tasks including:
 * `RANK()`
 * `NTILE()`
 * `LAG()`
-* `LEAD()`
-* `FIRST_VALUE()`
-* `LAST_VALUE()`
 
 Use cases include:
 
